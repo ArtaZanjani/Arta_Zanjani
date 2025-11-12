@@ -4,7 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import Card from "../card/Card";
 import type { ProjectType } from "@/types/type";
-import supabase from "@/configs/supabase";
+import useSWR from "swr";
+import { fetcher } from "@/utils/function";
+import ErrorUi from "../ErrorUi";
 const sorts = ["Newest", "Oldest"] as const;
 
 const Projects = () => {
@@ -30,34 +32,9 @@ const Projects = () => {
     }
   }, [sort]);
 
-  const [data, setData] = useState<ProjectType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const { data, isLoading, error } = useSWR<ProjectType[]>("projects", fetcher);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setIsLoading(true);
-        setError("");
-
-        const { data, error } = await supabase
-          .from("projects")
-          .select("*")
-          .order("id", { ascending: sort === "Oldest" });
-
-        if (error) throw error;
-
-        setData(data as ProjectType[]);
-      } catch (err) {
-        const error = err as Error;
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, [sort]);
+  const sortedData = sort === "Newest" ? [...(data ?? [])].reverse() : data ?? [];
 
   return (
     <AnimateLayout title={buttons[2].label}>
@@ -67,7 +44,7 @@ const Projects = () => {
             ref={(el) => {
               buttonRefs.current[index] = el;
             }}
-            className={`font-medium duration-200 ${e === sort && "text-orange"}`}
+            className={`font-Poppins_Medium duration-200 ${e === sort && "text-orange"}`}
             onClick={() => setSort(e)}
             key={index}
           >
@@ -84,17 +61,14 @@ const Projects = () => {
             <Card isLoading key={index} />
           ))}
         </div>
-      ) : data && data.length ? (
+      ) : sortedData.length ? (
         <div className="mt-7 grid grid-cols-[repeat(auto-fit,minmax(270px,auto))] justify-center min-[665px]:justify-between gap-5">
-          {data.map((e) => (
+          {sortedData.map((e) => (
             <Card isLoading={false} image={e.image} title={e.title} category={e.category} link={e.link} id={e.id} key={e.id} />
           ))}
         </div>
       ) : (
-        <div className="mt-7">
-          <h2 className="text-2xl">No Projects Found</h2>
-          <p className="max-w-xs mt-1 text-gray-500 dark:text-gray-400">{error.length ? error : "There are currently no projects available. Please check back later"}</p>
-        </div>
+        <ErrorUi title="No Projects Found" error={error ?? "There are currently no projects available. Please check back later"} />
       )}
     </AnimateLayout>
   );

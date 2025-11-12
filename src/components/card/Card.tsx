@@ -28,7 +28,7 @@ const Card = (props: CardPropsType) => {
         </>
       ) : (
         <>
-          <p className="text-lg font-bold mt-4.5">{props.title}</p>
+          <p className="text-lg font-Poppins_Bold mt-4.5">{props.title}</p>
           <div className="flex items-end justify-between flex-1 w-full mt-auto">
             <p className="text-sm">{props.category}</p>
             <a href={props.link} target="_blank" className="rounded-full size-10 innerBgColor full_center">

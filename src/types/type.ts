@@ -1,9 +1,12 @@
-import type { UUID } from "crypto";
-
 export type ProjectType = {
-  id: UUID;
+  id: string;
   title: string;
   category: string;
   link: string;
   image: string;
+};
+
+export type SkillType = {
+  id: string;
+  skill: string;
 };

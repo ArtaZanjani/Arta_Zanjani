@@ -83,7 +83,7 @@ const MoreInfo = () => {
               }}
             >
               <e.icon className="size-8" color="var(--color-orange)" variant={activeButton === e.label ? "Bold" : "Bulk"} />
-              <p className="">{e.label}</p>
+              <p className="font-Poppins_Medium">{e.label}</p>
             </Monoco>
           ))}
         </Monoco>

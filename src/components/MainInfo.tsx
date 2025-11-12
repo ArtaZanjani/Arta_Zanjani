@@ -53,7 +53,7 @@ const MainInfo = () => {
 
             <div className="w-full flex flex-col max-[460px]:items-center xl:items-center gap-y-3">
               <motion.div initial={{ width: 0 }} animate={{ width: "fit-content" }} transition={{ ...springTransition, delay: 0.3 }} className="overflow-hidden flex flex-col max-[460px]:items-center xl:items-center">
-                <h1 className="text-3xl text-nowrap font-bold  max-xl:min-[460px]:mt-3">Arta Zanjani</h1>
+                <h1 className="text-3xl text-nowrap font-Poppins_Semibold  max-xl:min-[460px]:mt-3">Arta Zanjani</h1>
                 <strong className="font-medium text-nowrap text-neutral-600 dark:text-ice/80">Frontend Developer</strong>
               </motion.div>
 
@@ -98,12 +98,12 @@ const MainInfo = () => {
                     delay: index * 0.05,
                   }}
                   {...(e.path ? { href: e.path } : {})}
-                  className={`py-4.5 flex items-start justify-start gap-x-2.5 ${index !== contactUs.length - 1 && "border-b dark:border-ice"}`}
+                  className={`py-4.5 flex items-center justify-start gap-x-2.5 ${index !== contactUs.length - 1 && "border-b dark:border-ice"}`}
                 >
                   <e.icon className="size-6 fill-orange" variant="Bold" />
                   <div className="flex flex-col">
                     <p className="font-medium text-neutral-600 dark:text-ice/80">{e.label}</p>
-                    <p className="">{e.value}</p>
+                    <p>{e.value}</p>
                   </div>
                 </Element>
               );
