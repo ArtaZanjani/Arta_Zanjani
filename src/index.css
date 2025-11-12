@@ -9,17 +9,38 @@
   --color-red: #ec1b09;
   --color-dark: #151f33;
   --shadow-custom: 0 0 4px rgba(0, 0, 0, 0.25);
-  --font-GoogleSans: "GoogleSans", sans-serif;
+
+  --font-Poppins_Regular: "Poppins_Regular", sans-serif;
+  --font-Poppins_Medium: "Poppins_Medium", sans-serif;
+  --font-Poppins_Semibold: "Poppins_Semibold", sans-serif;
+  --font-Poppins_Bold: "Poppins_Bold", sans-serif;
+
   --breakpoint-xl: 1280px;
 }
 
 @layer base {
   @font-face {
-    font-family: "GoogleSans";
-    src: url("/fonts/Google\ Sans_v58.woff2");
+    font-family: "Poppins_Regular";
+    src: url("/public/fonts/Poppins-Regular.woff2");
   }
+
+  @font-face {
+    font-family: "Poppins_Medium";
+    src: url("/public/fonts/Poppins-Medium.woff2");
+  }
+
+  @font-face {
+    font-family: "Poppins_Semibold";
+    src: url("/public/fonts/Poppins-SemiBold.woff2");
+  }
+
+  @font-face {
+    font-family: "Poppins_Bold";
+    src: url("/public/fonts/Poppins-Bold.woff2");
+  }
+
   * {
-    @apply antialiased select-none scroll-smooth font-GoogleSans outline-0;
+    @apply antialiased select-none scroll-smooth font-Poppins_Regular outline-0;
   }
   body {
     @apply pb-5 overflow-x-hidden duration-200 bg-ice dark:bg-slate-900;
